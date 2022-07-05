@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+allprojects {
+    repositories { mavenCentral() }
+
+    group = "me.java"
+    java.sourceCompatibility = JavaVersion.VERSION_17
+
+}
+
+subprojects {
+    apply plugin: 'java-library'
+}
