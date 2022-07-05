@@ -1,16 +1,12 @@
 package me.java.reactor.flux;
 
 import org.junit.jupiter.api.Test;
-import org.reactivestreams.Subscriber;
 import reactor.core.publisher.Flux;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 public class FluxTest {
 
@@ -41,6 +37,16 @@ public class FluxTest {
                 "doOnNext" + 3,
                 "subscribe" + 3
         );
+    }
+
+    @Test
+    void doOnNext_is_not_executed_when_flux_has_no_subscribe() {
+        List<Integer> list = new ArrayList<>();
+        Integer[] integers = {1, 2, 3};
+        Flux<Integer> flux = Flux.just(integers)
+                .doOnNext(list::add);
+
+        assertThat(list).isEmpty();
     }
 
 }
