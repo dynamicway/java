@@ -1,6 +1,8 @@
 package me.java.reactor.flux;
 
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
@@ -65,6 +67,35 @@ public class FluxTest {
                 "subscribe2" + 2,
                 "subscribe2" + 3
         );
+    }
+
+    @Test
+    void if_nothing_in_the_onSubscribe_then_nothing_happens() {
+        List<Integer> list = new ArrayList<>();
+        Integer[] integers = {1, 2, 3};
+        Flux.just(integers).subscribe(new Subscriber<>() {
+
+            @Override
+            public void onSubscribe(Subscription s) {
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                list.add(integer);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+            }
+
+        });
+
+        assertThat(list).isEmpty();
     }
 
 }
