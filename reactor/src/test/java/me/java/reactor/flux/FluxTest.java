@@ -128,4 +128,34 @@ public class FluxTest {
         assertThat(list).containsExactly(integers);
     }
 
+    @Test
+    void if_onNext_does_not_call_request_then_stream_ends() {
+        List<Integer> list = new ArrayList<>();
+        Integer[] integers = {1, 2, 3};
+        Flux.just(integers).subscribe(new Subscriber<>() {
+
+            @Override
+            public void onSubscribe(Subscription s) {
+                s.request(1);
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                list.add(integer);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+            }
+
+        });
+
+        assertThat(list).containsExactly(integers[0]);
+    }
+
 }
