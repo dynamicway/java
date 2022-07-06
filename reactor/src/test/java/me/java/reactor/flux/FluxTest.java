@@ -216,4 +216,33 @@ public class FluxTest {
         assertThat(onCompleteExecuted.get()).isFalse();
     }
 
+    @Test
+    void onError_is_executed_when_onSubscribe_throws_exception() {
+        AtomicBoolean onErrorExecuted = new AtomicBoolean(false);
+
+        Flux.fromIterable(List.of(1, 2, 3))
+                .subscribe(new Subscriber<>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(2);
+                        throw new RuntimeException();
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        onErrorExecuted.set(true);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+        assertThat(onErrorExecuted.get()).isTrue();
+    }
+
 }
