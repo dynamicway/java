@@ -188,4 +188,32 @@ public class FluxTest {
 
     }
 
+    @Test
+    void onComplete_is_not_executed_if_not_all_data_are_requested() {
+        AtomicBoolean onCompleteExecuted = new AtomicBoolean(false);
+
+        Flux.fromIterable(List.of(1, 2, 3))
+                .subscribe(new Subscriber<>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(2);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        onCompleteExecuted.set(true);
+                    }
+                });
+
+        assertThat(onCompleteExecuted.get()).isFalse();
+    }
+
 }
