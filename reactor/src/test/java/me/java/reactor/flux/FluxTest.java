@@ -49,4 +49,22 @@ public class FluxTest {
         assertThat(list).isEmpty();
     }
 
+    @Test
+    void multiple_subscribe_to_a_single_flux() {
+        List<String> list = new ArrayList<>();
+        Integer[] integers = {1, 2, 3};
+        Flux<Integer> flux = Flux.just(integers);
+        flux.subscribe(integer -> list.add("subscribe1" + integer));
+        flux.subscribe(integer -> list.add("subscribe2" + integer));
+
+        assertThat(list).containsExactly(
+                "subscribe1" + 1,
+                "subscribe1" + 2,
+                "subscribe1" + 3,
+                "subscribe2" + 1,
+                "subscribe2" + 2,
+                "subscribe2" + 3
+        );
+    }
+
 }
