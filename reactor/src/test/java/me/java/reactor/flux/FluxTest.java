@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -156,6 +157,35 @@ public class FluxTest {
         });
 
         assertThat(list).containsExactly(integers[0]);
+    }
+
+    @Test
+    void onComplete_is_executed_when_all_data_is_published() {
+        AtomicBoolean onCompleteExecuted = new AtomicBoolean(false);
+
+        Flux.fromIterable(List.of(1, 2, 3))
+                .subscribe(new Subscriber<>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(3);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        onCompleteExecuted.set(true);
+                    }
+                });
+
+        assertThat(onCompleteExecuted.get()).isTrue();
+
     }
 
 }
