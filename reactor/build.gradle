@@ -1,3 +1,6 @@
 dependencies {
-    implementation 'io.projectreactor:reactor-core:3.4.19'
+    implementation platform('io.projectreactor:reactor-bom:2020.0.23')
+
+    implementation 'io.projectreactor:reactor-core'
+    testImplementation 'io.projectreactor:reactor-test'
 }
