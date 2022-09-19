@@ -12,4 +12,9 @@ public class SamsungCellPhoneFactory implements CellPhoneFactory {
         return new CellPhone(samsungCellPhoneCase, samsungCellPhoneDevice, CellPhone.Type.SAMSUNG);
     }
 
+    @Override
+    public CellPhone.Type getType() {
+        return CellPhone.Type.SAMSUNG;
+    }
+
 }

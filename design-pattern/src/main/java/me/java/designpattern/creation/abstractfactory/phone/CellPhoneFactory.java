@@ -4,4 +4,5 @@ public interface CellPhoneFactory {
 
     CellPhone createCellPhone();
 
+    CellPhone.Type getType();
 }
