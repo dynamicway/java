@@ -8,7 +8,8 @@ public interface Notebook {
 
     enum Type {
         SAMSUNG,
-        APPLE
+        APPLE,
+        GOOGLE
     }
 
 }
