@@ -1,5 +1,6 @@
-package me.java.designpattern.creation;
+package me.java.designpattern.creation.singleton;
 
+import me.java.designpattern.creation.singleton.SingletonObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

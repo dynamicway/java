@@ -1,4 +1,4 @@
-package me.java.designpattern.creation;
+package me.java.designpattern.creation.singleton;
 
 import java.util.Random;
 
