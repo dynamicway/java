@@ -4,6 +4,7 @@ public record CellPhone(CellPhoneCase cellPhoneCase, CellPhoneDevice cellPhoneDe
 
     public enum Type {
         SAMSUNG,
+        GOOGLE,
         APPLE
     }
 
