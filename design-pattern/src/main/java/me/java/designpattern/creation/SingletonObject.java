@@ -14,11 +14,15 @@ public class SingletonObject {
     }
 
     public static SingletonObject getInstanceWithoutConcurrency() {
+        initializedWithoutConcurrency();
+        return singletonInstanceWithoutConcurrency;
+    }
+
+    private static void initializedWithoutConcurrency() {
         if (singletonInstanceWithoutConcurrency == null) {
             sleep(1000);
             singletonInstanceWithoutConcurrency = new SingletonObject();
         }
-        return singletonInstanceWithoutConcurrency;
     }
 
     private static void sleep(int duration) {
@@ -30,6 +34,11 @@ public class SingletonObject {
     }
 
     public static SingletonObject getInstanceWithSynchronized() {
+        initializedSingletonWithSynchronized();
+        return singletonInstanceWithSynchronized;
+    }
+
+    private static void initializedSingletonWithSynchronized() {
         if (singletonInstanceWithSynchronized == null) {
             synchronized (SingletonObject.class) {
                 if (singletonInstanceWithSynchronized == null) {
@@ -37,6 +46,5 @@ public class SingletonObject {
                 }
             }
         }
-        return singletonInstanceWithSynchronized;
     }
 }
