@@ -2,12 +2,14 @@ package me.java.designpattern.creation.abstractfactory.phone;
 
 import me.java.designpattern.creation.abstractfactory.phone.apple.AppleCellPhoneFactory;
 import me.java.designpattern.creation.abstractfactory.phone.samsung.SamsungCellPhoneFactory;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CellPhoneProviderTest {
 
@@ -19,6 +21,14 @@ class CellPhoneProviderTest {
         CellPhone cellPhone = cellPhoneProvider.createCellPhone(cellPhoneType);
 
         assertThat(cellPhone.cellPhoneType()).isEqualTo(cellPhoneType);
+    }
+
+    @Test
+    void cannot_create_a_cell_phone_that_not_exists_a_type_of_cell_phone_factory() {
+        CellPhoneProvider cellPhoneProviderWithOnlySamsungFactory = new CellPhoneProvider(List.of(new SamsungCellPhoneFactory()));
+
+        assertThatThrownBy(() -> cellPhoneProviderWithOnlySamsungFactory.createCellPhone(CellPhone.Type.APPLE))
+                .isInstanceOf(IllegalStateException.class);
     }
 
 }

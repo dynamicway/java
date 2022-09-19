@@ -15,7 +15,17 @@ public class CellPhoneProvider {
     }
 
     public CellPhone createCellPhone(CellPhone.Type cellPhoneType) {
-        CellPhoneFactory cellPhoneFactory = cellPhoneFactories.get(cellPhoneType);
+        CellPhoneFactory cellPhoneFactory = getCellPhoneFactory(cellPhoneType);
+        verifyFactoryIsNull(cellPhoneFactory);
         return cellPhoneFactory.createCellPhone();
+    }
+
+    private CellPhoneFactory getCellPhoneFactory(CellPhone.Type cellPhoneType) {
+        return cellPhoneFactories.get(cellPhoneType);
+    }
+
+    private void verifyFactoryIsNull(CellPhoneFactory cellPhoneFactory) {
+        if (cellPhoneFactory == null)
+            throw new IllegalStateException();
     }
 }
