@@ -5,6 +5,7 @@ import java.util.Random;
 public class SingletonObject {
 
     private static SingletonObject singletonInstanceWithoutConcurrency;
+    private static SingletonObject singletonInstanceWithSynchronized;
 
     private final int randomValue;
 
@@ -28,4 +29,14 @@ public class SingletonObject {
         }
     }
 
+    public static SingletonObject getInstanceWithSynchronized() {
+        if (singletonInstanceWithSynchronized == null) {
+            synchronized (SingletonObject.class) {
+                if (singletonInstanceWithSynchronized == null) {
+                    singletonInstanceWithSynchronized = new SingletonObject();
+                }
+            }
+        }
+        return singletonInstanceWithSynchronized;
+    }
 }
