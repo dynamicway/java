@@ -1,16 +1,17 @@
 package me.java.designpattern.creation.abstractfactory.phone;
 
-import me.java.designpattern.creation.abstractfactory.phone.samsung.SamsungCellPhoneFactory;
-
 import java.util.EnumMap;
+import java.util.List;
 
 public class CellPhoneProvider {
 
     private final EnumMap<CellPhone.Type, CellPhoneFactory> cellPhoneFactories;
 
-    public CellPhoneProvider() {
+    public CellPhoneProvider(List<CellPhoneFactory> cellPhoneFactories) {
         this.cellPhoneFactories = new EnumMap<>(CellPhone.Type.class);
-        cellPhoneFactories.put(CellPhone.Type.SAMSUNG, new SamsungCellPhoneFactory());
+        for (CellPhoneFactory cellPhoneFactory : cellPhoneFactories) {
+            this.cellPhoneFactories.put(cellPhoneFactory.getType(), cellPhoneFactory);
+        }
     }
 
     public CellPhone createCellPhone(CellPhone.Type cellPhoneType) {
