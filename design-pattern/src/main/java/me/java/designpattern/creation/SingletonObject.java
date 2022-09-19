@@ -7,6 +7,10 @@ public class SingletonObject {
     private static SingletonObject singletonInstanceWithoutConcurrency;
     private static SingletonObject singletonInstanceWithSynchronized;
 
+    private static class SingletonObjectHolder {
+        private static final SingletonObject SINGLETON_INSTANCE_WITH_HOLDER = new SingletonObject();
+    }
+
     private final int randomValue;
 
     private SingletonObject() {
@@ -42,9 +46,14 @@ public class SingletonObject {
         if (singletonInstanceWithSynchronized == null) {
             synchronized (SingletonObject.class) {
                 if (singletonInstanceWithSynchronized == null) {
+                    sleep(1000);
                     singletonInstanceWithSynchronized = new SingletonObject();
                 }
             }
         }
+    }
+
+    public static SingletonObject getInstanceWithHolder() {
+        return SingletonObjectHolder.SINGLETON_INSTANCE_WITH_HOLDER;
     }
 }
