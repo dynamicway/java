@@ -15,9 +15,6 @@ class ParameterPassingMechanismTest {
         assertThat(originValue).isEqualTo(10);
     }
 
-    private void modifyValue(int originValue) {
-        originValue = 20;
-    }
 
     @Test
     void when_modifying_objects_then_original_objects_changed() {
@@ -26,6 +23,23 @@ class ParameterPassingMechanismTest {
         changeName(givenPerson);
 
         assertThat(givenPerson.getName()).isEqualTo("Changed");
+    }
+
+    @Test
+    void when_modifying_objects_to_new_reference_then_original_objects_not_modified() {
+        Person givenPerson = new Person("Origin");
+
+        changeReference(givenPerson);
+
+        assertThat(givenPerson.getName()).isEqualTo("Origin");
+    }
+
+    private void modifyValue(int originValue) {
+        originValue = 20;
+    }
+
+    private void changeReference(Person person) {
+        person = new Person("Change");
     }
 
     private void changeName(final Person person) {
