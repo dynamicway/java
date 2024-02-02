@@ -49,7 +49,7 @@ class PhilosopherTest {
         sut.eatSpaghettiOnTable(table);
 
         assertThat(table.getForksCount()).isEqualTo(2);
-        assertThat(sut.getForksCount()).isEqualTo(2);
+        assertThat(sut.getForksCount()).isZero();
         assertThat(sut.hasEaten()).isTrue();
     }
 

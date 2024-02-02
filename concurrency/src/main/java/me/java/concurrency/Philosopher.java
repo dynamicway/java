@@ -2,7 +2,7 @@ package me.java.concurrency;
 
 class Philosopher {
     private final int eatingSeconds;
-    private final int forksCount;
+    private int forksCount;
     private boolean eaten = false;
 
     Philosopher(int eatingSeconds, int forksCount) {
@@ -15,6 +15,7 @@ class Philosopher {
             table.preemptFork();
         eat();
         table.addForks(forksCount);
+        forksCount = 0;
     }
 
     private void eat() {
