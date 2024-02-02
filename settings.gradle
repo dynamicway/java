@@ -1,3 +1,3 @@
 rootProject.name = 'java'
 
-include 'reactor', 'design-pattern', 'parameter-passing-mechanism'
+include 'reactor', 'design-pattern', 'parameter-passing-mechanism', 'concurrency'
