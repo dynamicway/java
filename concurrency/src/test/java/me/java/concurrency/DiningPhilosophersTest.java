@@ -1,7 +1,9 @@
 package me.java.concurrency;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +38,22 @@ class DiningPhilosophersTest {
 
         assertThatThrownBy(sut::eat)
                 .hasMessageContaining("It takes too long to eat.");
+        assertThat(sut.hasEaten()).isFalse();
+    }
+
+    @Test
+    @Timeout(2)
+    void philosophers_can_eat_at_the_same_time() {
+        Table table = new Table(99);
+        List<Philosopher> philosophers = new ArrayList<>();
+        for (int i = 0; i < 99; i++) {
+            philosophers.add(new Philosopher(1, 1));
+        }
+        DiningPhilosophers sut = new DiningPhilosophers(2, table, philosophers);
+
+        sut.eat();
+
+        assertThat(sut.hasEaten()).isTrue();
     }
 
 }
