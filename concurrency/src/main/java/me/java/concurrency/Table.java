@@ -7,8 +7,8 @@ class Table {
         this.forkCount = forkCount;
     }
 
-    void putFork() {
-        forkCount++;
+    void addForks(int forkCount) {
+        this.forkCount = forkCount;
     }
 
     void preemptFork() {
