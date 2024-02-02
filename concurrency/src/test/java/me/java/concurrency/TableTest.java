@@ -16,4 +16,15 @@ class TableTest {
                 .hasMessageContaining("There is no forks.");
     }
 
+    @Test
+    void if_a_fork_is_added_it_can_be_preempted_again() {
+        Table sut = new Table(1);
+
+        sut.preemptFork();
+        assertThatThrownBy(sut::preemptFork)
+                .hasMessageContaining("There is no forks.");
+        sut.putFork();
+        sut.preemptFork();
+    }
+
 }

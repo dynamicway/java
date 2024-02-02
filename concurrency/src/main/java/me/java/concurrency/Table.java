@@ -7,6 +7,10 @@ class Table {
         this.forkCount = forkCount;
     }
 
+    void putFork() {
+        forkCount++;
+    }
+
     void preemptFork() {
         if (forkCount == 0)
             throw new RuntimeException("There is no forks.");
