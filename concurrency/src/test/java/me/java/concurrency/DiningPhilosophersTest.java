@@ -56,4 +56,19 @@ class DiningPhilosophersTest {
         assertThat(sut.hasEaten()).isTrue();
     }
 
+    @Test
+    void you_cannot_eat_if_you_do_not_have_enough_forks() {
+        Table table = new Table(0);
+        List<Philosopher> philosophers = List.of(new Philosopher(1, 1),
+                                                 new Philosopher(1, 1),
+                                                 new Philosopher(1, 1),
+                                                 new Philosopher(1, 1),
+                                                 new Philosopher(1, 1));
+        DiningPhilosophers sut = new DiningPhilosophers(3, table, philosophers);
+
+        assertThatThrownBy(sut::eat)
+                .hasMessageContaining("It takes too long to eat.");
+        assertThat(sut.hasEaten()).isFalse();
+    }
+
 }
