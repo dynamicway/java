@@ -1,19 +1,23 @@
 package me.java.concurrency;
 
 class Table {
-    private int forkCount;
+    private int forksCount;
 
-    Table(int forkCount) {
-        this.forkCount = forkCount;
+    Table(int forksCount) {
+        this.forksCount = forksCount;
     }
 
     void addForks(int forkCount) {
-        this.forkCount = forkCount;
+        this.forksCount = forkCount;
     }
 
     void preemptFork() {
-        if (forkCount == 0)
+        if (forksCount == 0)
             throw new RuntimeException("There is no forks.");
-        forkCount--;
+        forksCount--;
+    }
+
+    int getForksCount() {
+        return forksCount;
     }
 }
