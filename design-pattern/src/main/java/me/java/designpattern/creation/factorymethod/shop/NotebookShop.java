@@ -11,7 +11,7 @@ public class NotebookShop {
     private final EnumMap<Notebook.Type, NotebookFactory> notebookFactories;
 
     public NotebookShop(List<NotebookFactory> notebookFactories) {
-        this.notebookFactories = new EnumMap<>(NotebookFactory.class);
+        this.notebookFactories = new EnumMap<>(Notebook.Type.class);
         for (NotebookFactory notebookFactory : notebookFactories) {
             this.notebookFactories.put(notebookFactory.getType(), notebookFactory);
         }
