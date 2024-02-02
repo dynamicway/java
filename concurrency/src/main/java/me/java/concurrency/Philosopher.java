@@ -1,6 +1,7 @@
 package me.java.concurrency;
 
 class Philosopher {
+    private static final int MINIMUM_NUMBER_OF_FORKS_TO_EAT = 2;
     private final int eatingSeconds;
     private int forksCount;
     private boolean eaten = false;
@@ -11,9 +12,13 @@ class Philosopher {
     }
 
     public void eatSpaghettiOnTable(Table table) {
-        if (forksCount < 2)
+        if (forksCount < MINIMUM_NUMBER_OF_FORKS_TO_EAT)
             table.preemptFork();
         eat();
+        putForksToTable(table);
+    }
+
+    private void putForksToTable(Table table) {
         table.addForks(forksCount);
         forksCount = 0;
     }
