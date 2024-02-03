@@ -20,13 +20,13 @@ class DiningPhilosophers {
     }
 
     void eat() {
-        TimerTask task = readyEating();
-        startEatingAndObserveEatingFinishedWithinTime(task);
+        TimerTask eatingTask = readyEating();
+        startEatingAndObserveEatingFinishedWithinTime(eatingTask);
     }
 
-    private void startEatingAndObserveEatingFinishedWithinTime(TimerTask task) {
+    private void startEatingAndObserveEatingFinishedWithinTime(TimerTask eatingTask) {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
-        Future<?> future = executorService.submit(task);
+        Future<?> future = executorService.submit(eatingTask);
         try {
             future.get(eatingSeconds, TimeUnit.SECONDS);
         } catch (Exception e) {
